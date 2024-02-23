@@ -1,42 +1,60 @@
 const myWeatherApi = "08ffff77c57ae5d317932419d11893df";
 const url = "api.openweathermap.org/data/2.5/weather";
 
-const searchBtn = document.querySelector(".search");
+const searchBtn = document.querySelector(".fa-magnifying-glass");
+const moreBtn = document.querySelector(".more");
+
+const topOutput = document.querySelector(".top");
+const date = document.querySelector(".date");
 const locationOutput = document.querySelector(".location");
 const tempOutput = document.querySelector(".temp");
+
 const descOutput = document.querySelector("desc");
 const feelOutput = document.querySelector(".feel");
 const windOutput = document.querySelector(".wind");
 const pressureOutput = document.querySelector(".pressure");
-const uvOutput = document.querySelector(".uv");
+const cloudOutput = document.querySelector(".cloud");
 const humidityOutput = document.querySelector(".humidity");
+const sunrise = document.querySelector(".sunrise");
+const sunset = document.querySelector(".sunset");
 
-const regex = /^[a-zA-Z]+$/;
-const country = "DE";
+const more = document.querySelector(".moreDiv");
 
-// const myWeatherZip = () => {
-//     console.log("zip");
-// };
+const fiveDays = document.querySelector(".fiveDays");
+const day1 = document.querySelector(".day1");
+const day2 = document.querySelector(".day2");
+const day3 = document.querySelector(".day3");
+const day4 = document.querySelector(".day4");
+const day5 = document.querySelector(".day5");
 
-searchBtn.addEventListener("click", () => {
+// EventListener für search button
+
+searchBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    fiveDays.style.display = "none";
     let location = document.querySelector(".input").value;
-    console.log(location);
-
-    // if (location === regex) {
-    //     myWeatherCity();
-    // } else {
-    //     myWeatherZip();
-    // }
-    myWeatherCity(location);
+    if (isNaN(location) === false) {
+        alert("Invalid input");
+        return;
+    } else {
+        console.log(location);
+        myWeatherCity(location);
+    }
 });
 
-// ! holt sich longitude und latitude vom per input und übergibt dann an nächste function
+// Eventlistener für 5 days button
+
+moreBtn.addEventListener("click", () => {
+    fiveDays.style.display = "block ";
+});
+
+// ! holt sich longitude und latitude von input und übergibt dann an nächste function
 
 const myWeatherCity = (location) => {
     console.log("city");
     console.log(location);
 
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}, ${country}&limit=1&appid=${myWeatherApi}`)
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${myWeatherApi}`)
         .then((response) => response.json())
         .then((data) => currentWeather(data[0].lon, data[0].lat)) //fetchWeather5Days(data[0].lon,data[0].lat))
         .catch((error) => console.log(error));
@@ -47,8 +65,9 @@ const myWeatherCity = (location) => {
 const currentWeather = (lon, lat) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${myWeatherApi}&units=metric`)
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => output(data))
         .catch((error) => console.log(error));
+    fetchWeather5Days(lon, lat);
 };
 
 // ! holt sich die forecast für 5 tage
@@ -56,25 +75,60 @@ const currentWeather = (lon, lat) => {
 const fetchWeather5Days = (lon, lat) => {
     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${myWeatherApi}&units=metric`)
         .then((response) => response.json())
-        .then((data) => output(data))
+        .then((data) => outputForecast(data)) //
+
         .catch((error) => console.log(error));
 };
 
-const output = (data) => {
-    console.log(data.list);
-    console.log(data.list[0]);
-    console.log(data.list[0].main.temp);
-    console.log(data.list[0].main.temp.feels_like);
-    console.log(data.list[0].main.temp.temp_min);
-    console.log(data.list[0].main.temp.temp_max);
-    console.log(data.list[0].weather.description);
-    console.log(data.list[0].clouds);
-    console.log(data.list[0].wind.speed);
+const outputForecast = (data) => {
+    console.log(data);
+    day1.innerHTML = `
+    
+    ${calcSunriseSet(data.list[7].dt).toLocaleDateString("en", optionsDay)} Temperature: ${Math.round(data.list[7].main.temp)}°C
+    `;
+    day2.innerHTML = `
+    ${calcSunriseSet(data.list[15].dt).toLocaleDateString("en", optionsDay)} Temperature: ${Math.round(data.list[15].main.temp)}°C
+    `;
+    day3.innerHTML = `
+    ${calcSunriseSet(data.list[23].dt).toLocaleDateString("en", optionsDay)} Temperature: ${Math.round(data.list[23].main.temp)}°C
+    `;
+    day4.innerHTML = `
+    ${calcSunriseSet(data.list[31].dt).toLocaleDateString("en", optionsDay)} Temperature: ${Math.round(data.list[31].main.temp)}°C
+    `;
+    day5.innerHTML = `
+    ${calcSunriseSet(data.list[39].dt).toLocaleDateString("en", optionsDay)} Temperature: ${Math.round(data.list[39].main.temp)}°C
+    `;
 };
 
-// ##############leider nicht benötigt!##################
+const iconURLPre = `https://openweathermap.org/img/wn/`;
+const iconURLPost = "@2x.png";
 
-const fahrenheit2Celsius = (fahrenheit) => {
-    const celsius = (fahrenheit - 32) * (5 / 9);
-    return celsius;
+const output = (data) => {
+    date.innerHTML = `${calcSunriseSet(data.dt).toLocaleDateString("en", options)}`;
+    topOutput.innerHTML = `${data.weather[0].main} ${data.weather[0].description} <img src="${iconURLPre}${data.weather[0].icon}${iconURLPost}">`;
+    tempOutput.innerHTML = `Temperature: ${Math.round(data.main.temp)}°C`;
+    feelOutput.innerHTML = `Feels like: ${Math.round(data.main.feels_like)}°C`;
+    sunrise.innerHTML = `Sunrise: ${calcSunriseSet(data.sys.sunrise).toLocaleTimeString("en")}`;
+    sunset.innerHTML = `Sunset: ${calcSunriseSet(data.sys.sunset).toLocaleTimeString("en")}`;
+    windOutput.innerHTML = `Wind: ${data.wind.speed}m/s`;
+    cloudOutput.innerHTML = `Clouds: ${data.clouds.all}%`;
+    humidityOutput.innerHTML = `Humidity: ${data.main.humidity}%`;
+    pressureOutput.innerHTML = `Pressure: ${data.main.pressure}hPa`;
+    moreBtn.style.display = "block";
+};
+
+const calcSunriseSet = (time) => {
+    let result = new Date(time * 1000);
+    return result;
+};
+// ###########################
+const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+};
+// #############################
+const optionsDay = {
+    weekday: "long",
 };
