@@ -4,10 +4,14 @@ const url = "api.openweathermap.org/data/2.5/weather";
 const searchBtn = document.querySelector(".fa-magnifying-glass");
 const moreBtn = document.querySelector(".more");
 
+const form = document.querySelector("form");
+
 const topOutput = document.querySelector(".top");
 const date = document.querySelector(".date");
 const locationOutput = document.querySelector(".location");
 const tempOutput = document.querySelector(".temp");
+const country = document.querySelector(".country");
+const weather = document.querySelector(".weather");
 
 const descOutput = document.querySelector("desc");
 const feelOutput = document.querySelector(".feel");
@@ -28,16 +32,17 @@ const day4 = document.querySelector(".day4");
 const day5 = document.querySelector(".day5");
 
 // EventListener für search button
+const startCity = "Berlin";
 
-searchBtn.addEventListener("click", (event) => {
+form.addEventListener("submit", (event) => {
     event.preventDefault();
     fiveDays.style.display = "none";
     let location = document.querySelector(".input").value;
     if (isNaN(location) === false) {
-        alert("Invalid input");
+        alert();
         return;
     } else {
-        console.log(location);
+        // console.log(location);
         myWeatherCity(location);
     }
 });
@@ -51,22 +56,35 @@ moreBtn.addEventListener("click", () => {
 // ! holt sich longitude und latitude von input und übergibt dann an nächste function
 
 const myWeatherCity = (location) => {
-    console.log("city");
-    console.log(location);
+    // console.log("city");
+    // console.log(location);
 
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${myWeatherApi}`)
         .then((response) => response.json())
-        .then((data) => currentWeather(data[0].lon, data[0].lat)) //fetchWeather5Days(data[0].lon,data[0].lat))
+        .then((data) => {
+            // console.log(data);
+
+            if (data.length === 0) {
+                alert("Invalid input");
+                return;
+            }
+            currentWeather(data[0].lon, data[0].lat);
+        }) //fetchWeather5Days(data[0].lon,data[0].lat))
         .catch((error) => console.log(error));
 };
+myWeatherCity(startCity);
 
 // ! holt sich die aktuellen wetterdaten
 
 const currentWeather = (lon, lat) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${myWeatherApi}&units=metric`)
         .then((response) => response.json())
-        .then((data) => output(data))
+        .then((data) => {
+            output(data);
+            console.log(data);
+        })
         .catch((error) => console.log(error));
+
     fetchWeather5Days(lon, lat);
 };
 
@@ -105,8 +123,10 @@ const iconURLPost = "@2x.png";
 
 const output = (data) => {
     date.innerHTML = `${calcSunriseSet(data.dt).toLocaleDateString("en", options)}`;
-    topOutput.innerHTML = `${data.weather[0].main} ${data.weather[0].description} <img src="${iconURLPre}${data.weather[0].icon}${iconURLPost}">`;
-    tempOutput.innerHTML = `Temperature: ${Math.round(data.main.temp)}°C`;
+    topOutput.innerHTML = ` <img src="${iconURLPre}${data.weather[0].icon}${iconURLPost}">`;
+    weather.innerHTML = `${data.weather[0].description}`;
+    country.innerHTML = `${data.sys.country}`;
+    tempOutput.innerHTML = `${Math.round(data.main.temp)}°C`;
     feelOutput.innerHTML = `Feels like: ${Math.round(data.main.feels_like)}°C`;
     sunrise.innerHTML = `Sunrise: ${calcSunriseSet(data.sys.sunrise).toLocaleTimeString("en")}`;
     sunset.innerHTML = `Sunset: ${calcSunriseSet(data.sys.sunset).toLocaleTimeString("en")}`;

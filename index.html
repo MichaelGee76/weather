@@ -13,33 +13,46 @@
             <section class="output">
                 <div class="innerContainer">
                     <div class="searchDiv">
-                        <h1>WeatherApp</h1>
+                        <h1></h1>
 
-                        <form onsubmit="(event)">
+                        <form>
                             <input type="text" class="input" placeholder="Enter a city ..." />
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <button type="submit" class="submitBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
 
                             <button class="search">Weather</button>
                         </form>
                     </div>
 
                     <div class="detailContainer">
-                        <div class="details">
+                        <div class="topContainer">
                             <div class="top"></div>
                             <div class="topDetails">
-                                <h3 class="date"></h3>
-                                <h3 class="location"></h3>
                                 <h3 class="temp"></h3>
+                                <h3 class="weather"></h3>
+
+                                <h3 class="location"></h3>
+
                                 <h3 class="desc"></h3>
                             </div>
-
-                            <h3 class="feel"></h3>
-                            <h3 class="wind"></h3>
-                            <h3 class="pressure"></h3>
-                            <h3 class="cloud"></h3>
-                            <h3 class="humidity"></h3>
-                            <h3 class="sunrise"></h3>
-                            <h3 class="sunset"></h3>
+                        </div>
+                        <div class="dateX">
+                            <h3 class="country"></h3>
+                            <h3 class="date"></h3>
+                        </div>
+                        <div class="details">
+                            <div>
+                                <h3 class="feel"></h3>
+                                <h3 class="wind"></h3>
+                            </div>
+                            <div>
+                                <h3 class="pressure"></h3>
+                                <h3 class="cloud"></h3>
+                            </div>
+                            <div><h3 class="humidity"></h3></div>
+                            <div>
+                                <h3 class="sunrise"></h3>
+                                <h3 class="sunset"></h3>
+                            </div>
                         </div>
                         <div class="moreDiv">
                             <button class="more">5 days forecast</button>
