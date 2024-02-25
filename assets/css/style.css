@@ -6,6 +6,7 @@
 
 html {
     font-size: 62.5%;
+    font-family: ;
 }
 
 img {
@@ -17,51 +18,31 @@ a {
 }
 
 .wrapper {
-    min-height: 100vh;
-    min-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    width: auto;
     background-color: rgba(0, 0, 0, 0.801);
-    background-image: url(../images/sun.jpg);
+    background-image: url(../images/cloudy.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
 }
-
-.output {
-    max-height: 80vh;
-    max-width: 80vw;
+/* ########################## Output/Search #####################*/
+/* .output {
     margin: auto;
-}
+} */
 
 .innerContainer {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-height: 50vh;
+
+    border: rgba(255, 255, 255, 0.75) solid 1px;
     background-color: rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     padding: 30px;
-    -webkit-box-shadow: 0px 0px 24px 7px rgba(0, 0, 0, 0.53);
-    box-shadow: 0px 0px 24px 7px rgba(0, 0, 0, 0.53);
-}
-
-.more {
-    display: none;
-    width: 20vw;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px 10px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.329);
-    align-items: center;
-    justify-content: center;
-    color: white;
-    display: none;
-}
-
-.fiveDays {
-    display: none;
+    -webkit-box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
 }
 
 .searchDiv {
@@ -74,38 +55,6 @@ a {
     justify-content: center;
 }
 
-.topDetails {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 30px;
-}
-
-.topContainer {
-    width: 80%;
-    margin: auto;
-    display: flex;
-}
-
-h1 {
-    color: white;
-}
-.submitBtn {
-    all: unset;
-}
-
-.fa-magnifying-glass {
-    font-size: large;
-    cursor: pointer;
-    color: white;
-}
-
-.fa-magnifying-glass:hover {
-    transition: 300ms ease-in-out;
-    transform: scale(1.2);
-}
 .search {
     background-color: rgba(0, 0, 0, 0.171);
     background-repeat: no-repeat;
@@ -114,40 +63,31 @@ h1 {
     outline: white solid 1px;
     border-radius: 5px;
     padding: 6px 15px;
-    color: white;
+    color: whitesmoke;
     display: none;
 }
-/* 
-button:hover {
-    filter: brightness(1.1);
-} */
 
-form {
-    max-width: 300px;
+/* ##### hides the background from search button ############ */
+.submitBtn {
+    all: unset;
+}
+
+/* #####################  */
+
+.topDetails {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
+    /* gap: 20px; */
+    padding: 20px;
 }
 
-form input {
-    width: 200px;
-    padding: 8px 15px;
-    border-radius: 5px;
-    outline: none;
-    color: rgba(0, 0, 0, 0.767);
-    font-weight: 700;
-}
-
-/*  ############## */
-
-.temp {
-    font-size: 5rem;
-    color: rgb(255, 123, 0);
-}
-
-.weather {
-    font-size: 4rem;
-    color: white;
+.topContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 20px;
 }
 
 .top {
@@ -160,21 +100,139 @@ form input {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
     padding: 20px;
+}
+
+.dateX div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.weatherBox {
+    display: flex;
+    align-items: center;
+}
+/* ################## Form ############################ */
+form {
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+form input {
+    width: 200px;
+    all: unset;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-size: 2rem;
+    padding: 8px 15px;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 700;
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* ################# Box Shadow ################### */
+
+form input,
+.topContainer,
+.dateX,
+.details div,
+.dateX div {
     border-radius: 5px;
+    border: rgba(255, 255, 255, 0.75) solid 1px;
     background-color: rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
     box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
 }
 
-.date {
+form input,
+.topContainer,
+.dateX {
+    margin-bottom: 20px;
+}
+
+/*  ############## Details #######################*/
+
+.sunriseContainer {
+    display: flex;
+    gap: 10px;
+    color: whitesmoke;
+}
+
+.minTemp-sunRise * {
+    display: flex;
+}
+
+.minMax div,
+.minTemp-sunRise div {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.sunrise {
+    margin-bottom: 5px;
+}
+
+.details,
+.sunTemp {
+    border-radius: 5px;
+    border: rgba(255, 255, 255, 0.75) solid 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.details div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.temp {
+    font-size: 8rem;
+    color: rgb(255, 123, 0);
+    margin-bottom: 8px;
+}
+
+.feel {
+    color: whitesmoke;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.feelsLike {
+    color: rgb(255, 123, 0);
+}
+.weather {
     font-size: 3rem;
+    color: whitesmoke;
+}
+
+.date,
+.city {
+    font-size: clamp(1.5rem, 1.7316rem + -0.9882vw, 0.1875rem);
     color: rgba(255, 255, 255, 0.87);
 }
 
+.city {
+    font-size: clamp(1rem, 0.4706rem + 2.2588vw, 4rem);
+    margin-bottom: 15px;
+}
+
 .country {
-    color: white;
+    color: whitesmoke;
+    margin-bottom: 15px;
 }
 
 .details {
@@ -183,12 +241,108 @@ form input {
     gap: 20px;
 }
 
-.details div {
+.details div,
+.sunTemp div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px 30px;
     background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    margin-bottom: 20px;
+    color: whitesmoke;
+}
+
+.sunTemp {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.sunTemp div {
     color: white;
+    border-radius: 5px;
+    border: rgba(255, 255, 255, 0.75) solid 1px;
+    background-color: rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
     box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
+}
+
+.sunTemp img {
+    width: 50px;
+    height: 50px;
+}
+
+.sunTemp h3 {
+    font-size: clamp(1rem, 0.7794rem + 0.9412vw, 2.25rem);
+}
+
+/* ####################### More/5 Days #########################*/
+
+.more {
+    display: none;
+
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.329);
+    /* align-items: center; */
+    /* justify-content: center; */
+    color: white;
+    display: none;
+    all: unset;
+}
+
+.fiveDays {
+    display: none;
+}
+
+/* ####################### fontawesome icons ################## */
+
+.fa-sun,
+.fa-arrow-down,
+.fa-arrow-up {
+    color: rgb(255, 238, 0);
+    margin-bottom: 8px;
+}
+
+.fa-temperature-arrow-up,
+.fa-temperature-arrow-down {
+    margin-bottom: 8px;
+}
+
+.fa-magnifying-glass {
+    font-size: large;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+.fa-magnifying-glass:hover {
+    transition: 300ms ease-in-out;
+    transform: scale(1.2);
+}
+
+.fa-wind {
+    color: rgb(5, 5, 253);
+}
+
+.fa-droplet {
+    color: blue;
+}
+
+.fa-gauge-high {
+    color: darkorange;
+}
+
+.fa-cloud {
+    color: rgb(204, 197, 197);
+}
+
+/* ##################### footer ######################## */
+
+.moreDiv p {
+    color: whitesmoke;
+    font-size: 1.25rem;
+    text-align: center;
 }

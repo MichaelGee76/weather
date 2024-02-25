@@ -16,7 +16,7 @@
                         <h1></h1>
 
                         <form>
-                            <input type="text" class="input" placeholder="Enter a city ..." />
+                            <input type="text" class="input" placeholder="Check weather in ..." spellcheck="false" />
                             <button type="submit" class="submitBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
 
                             <button class="search">Weather</button>
@@ -26,48 +26,79 @@
                     <div class="detailContainer">
                         <div class="topContainer">
                             <div class="top"></div>
+                            <div class="weatherBox"><h3 class="weather"></h3></div>
                             <div class="topDetails">
                                 <h3 class="temp"></h3>
-                                <h3 class="weather"></h3>
+                                <h3 class="feel"></h3>
 
                                 <h3 class="location"></h3>
-
-                                <h3 class="desc"></h3>
+                                <div class="sunriseContainer">
+                                    <div class="minMax">
+                                        <div>
+                                            <!-- <h2>Min Temperature</h2> -->
+                                            <h3 class="minTemp"></h3>
+                                        </div>
+                                        <div>
+                                            <!-- <h2>Max Temperature</h2> -->
+                                            <h3 class="maxTemp"></h3>
+                                        </div>
+                                    </div>
+                                    <div class="minTemp-sunRise">
+                                        <div>
+                                            <!-- <h2>Sunrise</h2> -->
+                                            <h3 class="sunrise"></h3>
+                                        </div>
+                                        <div>
+                                            <!-- <h2>Sunset</h2> -->
+                                            <h3 class="sunset"></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <h3 class="desc"></h3> -->
                             </div>
                         </div>
                         <div class="dateX">
-                            <h3 class="country"></h3>
-                            <h3 class="date"></h3>
+                            <div>
+                                <h3 class="city"></h3>
+                                <h3 class="country"></h3>
+                                <h3 class="date"></h3>
+                            </div>
                         </div>
                         <div class="details">
                             <div>
-                                <h3 class="feel"></h3>
+                                <h2>Wind</h2>
                                 <h3 class="wind"></h3>
                             </div>
                             <div>
+                                <h2>Humidity</h2>
+                                <h3 class="humidity"></h3>
+                            </div>
+                            <div>
+                                <h2>Air Pressure</h2>
                                 <h3 class="pressure"></h3>
+                            </div>
+                            <div>
+                                <h2>Cloud Cover</h2>
                                 <h3 class="cloud"></h3>
                             </div>
-                            <div><h3 class="humidity"></h3></div>
-                            <div>
-                                <h3 class="sunrise"></h3>
-                                <h3 class="sunset"></h3>
-                            </div>
+                        </div>
+                        <div class="sunTemp">
+                            <div class="day1"></div>
+                            <div class="day2"></div>
+                            <div class="day3"></div>
+                            <div class="day4"></div>
+                            <div class="day5"></div>
                         </div>
                         <div class="moreDiv">
-                            <button class="more">5 days forecast</button>
+                            <button class="more"></button>
+                            <p>&copy by Michael Gee - not a designer, but a programmer</p>
                         </div>
-                        <div class="fiveDays">
-                            <h3 class="day1">Day1</h3>
-                            <h3 class="day2">Day2</h3>
-                            <h3 class="day3">Day3</h3>
-                            <h3 class="day4">Day4</h3>
-                            <h3 class="day5">Day5</h3>
-                        </div>
+                        <div class="fiveDays"></div>
                     </div>
                 </div>
             </section>
         </div>
+
         <script src="https://kit.fontawesome.com/290ffec511.js" crossorigin="anonymous"></script>
         <script src="assets/js/main.js"></script>
     </body>
