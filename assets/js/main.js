@@ -88,7 +88,8 @@ const currentWeather = (lon, lat) => {
         .then((response) => response.json())
         .then((data) => {
             output(data);
-            console.log(data);
+            console.log(typeof data.weather[0].main);
+            changeBgImage(data);
         })
         .catch((error) => console.log(error));
 
@@ -187,3 +188,24 @@ const optionsDay = {
 //     const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
 //     return capitalizedWord;
 // }
+
+let snowImage = "../images/snow.jpg";
+// let cloudImage = "../images/snow.jpg";
+// let rainImage = "../images/snow.jpg";
+// let clearImage = "../images/snow.jpg";
+
+const changeBgImage = (data) => {
+    const wrapper = document.querySelector(".wrapper"); // Assuming .wrapper is the element you want to change background for
+
+    if (data.weather[0].main.includes("Snow")) {
+        // Make sure to use "Snow" with capital S if that's how it appears in your data
+        wrapper.style.backgroundImage = "url('./assets/images/snow.jpg')";
+    } else if (data.weather[0].main.includes("Clouds")) {
+        wrapper.style.backgroundImage = "url('./assets/images/cloudy.jpg')";
+    } else if (data.weather[0].main.includes("Rain")) {
+        wrapper.style.backgroundImage = "url('./assets/images/rain.jpg')";
+    } else {
+        wrapper.style.backgroundImage = "url('./assets/images/sun.jpg')";
+    }
+};
+// assets\js\main.js assets\images
