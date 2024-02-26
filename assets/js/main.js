@@ -38,15 +38,16 @@ const day3 = document.querySelector(".day3");
 const day4 = document.querySelector(".day4");
 const day5 = document.querySelector(".day5");
 
-// EventListener für search button
-const startCity = "Oedheim";
+// ! EventListener für search button ##############################################################
+const startCity = "Oedheim"; // homebase
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     fiveDays.style.display = "none";
     let location = document.querySelector(".input").value;
-
-    if (isNaN(location) === false) {
+    if (location === "responsiv") {
+        alert("Responsivität wird völlig überschätzt und hier deshalb NICHT berücksichtigt!");
+    } else if (isNaN(location) === false) {
         alert();
         return;
     } else {
@@ -54,23 +55,18 @@ form.addEventListener("submit", (event) => {
     }
 });
 
-// Eventlistener für 5 days button
+// ! Eventlistener für 5 days button ################################################################
 
 moreBtn.addEventListener("click", () => {
     fiveDays.style.display = "block ";
 });
 
-// ! holt sich longitude und latitude von input und übergibt dann an nächste function
+// ! holt sich longitude und latitude von input und übergibt dann an nächste function #################
 
 const myWeatherCity = (location) => {
-    // console.log("city");
-    // console.log(location);
-
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${myWeatherApi}`)
         .then((response) => response.json())
         .then((data) => {
-            // console.log(data);
-
             if (data.length === 0) {
                 alert("Invalid input");
                 return;
@@ -81,7 +77,7 @@ const myWeatherCity = (location) => {
 };
 myWeatherCity(startCity);
 
-// ! holt sich die aktuellen wetterdaten
+// ! holt sich die aktuellen wetterdaten ##############################
 
 const currentWeather = (lon, lat) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${myWeatherApi}&units=metric`)
@@ -96,7 +92,7 @@ const currentWeather = (lon, lat) => {
     fetchWeather5Days(lon, lat);
 };
 
-// ! holt sich die forecast für 5 tage
+// ! holt sich die forecast für 5 tage ###################################
 
 const fetchWeather5Days = (lon, lat) => {
     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${myWeatherApi}&units=metric`)
@@ -106,23 +102,25 @@ const fetchWeather5Days = (lon, lat) => {
         .catch((error) => console.log(error));
 };
 
+// ! ################################ Erstellt den Inhalt in Output für den forecast ###############################
+
 const outputForecast = (data) => {
     console.log(data);
     day1.innerHTML = `
     
-    <h2>${calcSunriseSet(data.list[7].dt).toLocaleDateString("en", optionsDay)} </h2> <img src="${iconURLPre}${data.list[7].weather[0].icon}${iconURLPost}">  <h3>${Math.round(data.list[7].main.temp)}°C </h3> 
+    <h2>${calcSunriseSet(data.list[7].dt).toLocaleDateString("en", optionsDay)} </h2> <img src="${iconURLPre}${data.list[7].weather[0].icon}${iconURLPost}">  <h3>${data.list[7].main.temp.toFixed(1)}°C </h3> 
     `;
     day2.innerHTML = `
-    <h2>${calcSunriseSet(data.list[15].dt).toLocaleDateString("en", optionsDay)}</h2> <img src="${iconURLPre}${data.list[15].weather[0].icon}${iconURLPost}"> <h3>${Math.round(data.list[15].main.temp)}°C</h3>  
+    <h2>${calcSunriseSet(data.list[15].dt).toLocaleDateString("en", optionsDay)}</h2> <img src="${iconURLPre}${data.list[15].weather[0].icon}${iconURLPost}"> <h3>${data.list[15].main.temp.toFixed(1)}°C</h3>  
     `;
     day3.innerHTML = `
-    <h2>${calcSunriseSet(data.list[23].dt).toLocaleDateString("en", optionsDay)}</h2> <img src="${iconURLPre}${data.list[23].weather[0].icon}${iconURLPost}"> <h3>${Math.round(data.list[23].main.temp)}°C</h3>  
+    <h2>${calcSunriseSet(data.list[23].dt).toLocaleDateString("en", optionsDay)}</h2> <img src="${iconURLPre}${data.list[23].weather[0].icon}${iconURLPost}"> <h3>${data.list[23].main.temp.toFixed(1)}°C</h3>  
     `;
     day4.innerHTML = `
-    <h2>${calcSunriseSet(data.list[31].dt).toLocaleDateString("en", optionsDay)}</h2> <img src="${iconURLPre}${data.list[31].weather[0].icon}${iconURLPost}"> <h3>${Math.round(data.list[31].main.temp)}°C</h3>  
+    <h2>${calcSunriseSet(data.list[31].dt).toLocaleDateString("en", optionsDay)}</h2> <img src="${iconURLPre}${data.list[31].weather[0].icon}${iconURLPost}"> <h3>${data.list[31].main.temp.toFixed(1)}°C</h3>  
     `;
     day5.innerHTML = `
-    <h2>${calcSunriseSet(data.list[39].dt).toLocaleDateString("en", optionsDay)}</h2> <img src="${iconURLPre}${data.list[39].weather[0].icon}${iconURLPost}"> <h3>${Math.round(data.list[39].main.temp)}°C</h3>  
+    <h2>${calcSunriseSet(data.list[39].dt).toLocaleDateString("en", optionsDay)}</h2> <img src="${iconURLPre}${data.list[39].weather[0].icon}${iconURLPost}"> <h3>${data.list[39].main.temp.toFixed(1)}°C</h3>  
     `;
 };
 
@@ -135,10 +133,10 @@ const output = (data) => {
     weather.innerHTML = `${data.weather[0].description}`;
     city.innerHTML = `${data.name}`;
     country.innerHTML = `${data.sys.country}`;
-    tempOutput.innerHTML = `${Math.round(data.main.temp)}°C`;
-    feelOutput.innerHTML = `Feels like: <span class=feelsLike>${Math.round(data.main.feels_like)}°C</span>`;
-    minTemp.innerHTML = `<h3><i class="fa-solid fa-temperature-arrow-down"></i> ${Math.round(data.main.temp_min)}°C </h3>`;
-    maxTemp.innerHTML = `<h3><i class="fa-solid fa-temperature-arrow-up"></i> ${Math.round(data.main.temp_max)}°C</h3>`;
+    tempOutput.innerHTML = `${data.main.temp.toFixed(1)}°C`;
+    feelOutput.innerHTML = `Feels like: <span class=feelsLike>${data.main.feels_like.toFixed(1)}°C</span>`;
+    minTemp.innerHTML = `<h3><i class="fa-solid fa-temperature-arrow-down"></i> ${data.main.temp_min.toFixed(1)}°C </h3>`;
+    maxTemp.innerHTML = `<h3><i class="fa-solid fa-temperature-arrow-up"></i> ${data.main.temp_max.toFixed(1)}°C</h3>`;
     sunrise.innerHTML = ` <i class="fa-regular fa-sun"></i> <i class="fa-solid fa-arrow-up"></i> ${calcSunriseSetLocaleTime(data.sys.sunrise, data.timezone)}`;
     sunset.innerHTML = ` <i class="fa-regular fa-sun"></i> <i class="fa-solid fa-arrow-down"></i> ${calcSunriseSetLocaleTime(data.sys.sunset, data.timezone)}`;
     windOutput.innerHTML = `<i class="fa-solid fa-wind"></i>  ${Math.round(data.wind.speed) * 3.6} km/h`;
@@ -146,7 +144,6 @@ const output = (data) => {
     humidityOutput.innerHTML = `<i class="fa-solid fa-droplet"></i>  ${data.main.humidity}%`;
     pressureOutput.innerHTML = `<i class="fa-solid fa-gauge-high"></i>  ${data.main.pressure} hPa`;
     moreBtn.style.display = "block";
-    // innerContainer.innerHTML += `<p class="footer">&copy; Michael Gee - not a designer, but a programmer</p>`;
 };
 
 const calcSunriseSet = (time) => {
@@ -178,34 +175,28 @@ const options = {
     month: "long",
     day: "numeric",
 };
-// #############################
+
 const optionsDay = {
     weekday: "long",
 };
-// ###########################
-
-// function capitalize(word) {
-//     const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
-//     return capitalizedWord;
-// }
-
-let snowImage = "../images/snow.jpg";
-// let cloudImage = "../images/snow.jpg";
-// let rainImage = "../images/snow.jpg";
-// let clearImage = "../images/snow.jpg";
+// #############################
 
 const changeBgImage = (data) => {
-    const wrapper = document.querySelector(".wrapper"); // Assuming .wrapper is the element you want to change background for
-
+    const wrapper = document.querySelector(".wrapper");
     if (data.weather[0].main.includes("Snow")) {
-        // Make sure to use "Snow" with capital S if that's how it appears in your data
         wrapper.style.backgroundImage = "url('./assets/images/snow.jpg')";
     } else if (data.weather[0].main.includes("Clouds")) {
         wrapper.style.backgroundImage = "url('./assets/images/cloudy.jpg')";
     } else if (data.weather[0].main.includes("Rain")) {
-        wrapper.style.backgroundImage = "url('./assets/images/rain.jpg')";
+        wrapper.style.backgroundImage = "url('./assets/images/rain-blur.png')";
     } else {
         wrapper.style.backgroundImage = "url('./assets/images/sun.jpg')";
     }
 };
-// assets\js\main.js assets\images
+
+// ############################################################################
+
+function capitalize(word) {
+    const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
+    return capitalizedWord;
+}
