@@ -64,7 +64,7 @@ moreBtn.addEventListener("click", () => {
 // ! holt sich longitude und latitude von input und übergibt dann an nächste function #################
 
 const myWeatherCity = (location) => {
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${myWeatherApi}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${myWeatherApi}`)
         .then((response) => response.json())
         .then((data) => {
             if (data.length === 0) {
@@ -95,7 +95,7 @@ const currentWeather = (lon, lat) => {
 // ! holt sich die forecast für 5 tage ###################################
 
 const fetchWeather5Days = (lon, lat) => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${myWeatherApi}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${myWeatherApi}&units=metric`)
         .then((response) => response.json())
         .then((data) => outputForecast(data)) //
 
