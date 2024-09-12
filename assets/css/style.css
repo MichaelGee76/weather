@@ -8,6 +8,13 @@ html {
     font-size: 62.5%;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
 img {
     max-width: 100%;
 }
@@ -17,293 +24,127 @@ a {
 }
 
 .wrapper {
-    height: 100vh;
-    max-height: 100vh;
-    width: auto;
+    min-height: 100vh;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.801);
-    background-image: url(../images/sun.jpg);
     background-size: cover;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
 }
-
-.clear {
-    height: 100vh;
-    max-height: 100vh;
-    width: auto;
-    background-color: rgba(0, 0, 0, 0.801);
-    background-image: url(../images/clear.jpg);
-    background-size: cover;
-    background-repeat: repeat;
-}
-
-.snow {
-    height: 100vh;
-    max-height: 100vh;
-    width: auto;
-    background-color: rgba(0, 0, 0, 0.801);
-    background-image: url(../images/snow.jpg);
-    background-size: cover;
-    background-repeat: repeat;
-}
-
-.clouds {
-    height: 100vh;
-    max-height: 100vh;
-    width: auto;
-    background-color: rgba(0, 0, 0, 0.801);
-    background-image: url(../images/cloudy.jpg);
-    background-size: cover;
-    background-repeat: repeat;
-}
-
-.rain {
-    height: 100vh;
-    max-height: 100vh;
-    width: auto;
-    background-color: rgba(0, 0, 0, 0.801);
-    background-image: url(../images/rain.jpg);
-    background-size: cover;
-    background-repeat: repeat;
-}
-
-/* ########################## Output/Search #####################*/
-/* .output {
-    margin: auto;
-} */
 
 .innerContainer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    border: rgba(255, 255, 255, 0.75) solid 1px;
-    background-color: rgba(0, 0, 0, 0.25);
+    max-width: 400px;
+    max-height: 90%;
+    padding: 25px;
     border-radius: 10px;
-    padding: 30px;
-    -webkit-box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    max-width: calc(100% - 40px);
 }
 
 .searchDiv {
-    width: 20vw;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-}
-
-.search {
-    background-color: rgba(0, 0, 0, 0.171);
-    background-repeat: no-repeat;
-    border: none;
-    overflow: hidden;
-    outline: white solid 1px;
-    border-radius: 5px;
-    padding: 6px 15px;
-    color: whitesmoke;
-    display: none;
-}
-
-/* ##### hides the background from search button ############ */
-.submitBtn {
-    all: unset;
-}
-
-/* #####################  */
-
-.topDetails {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* gap: 20px; */
-    padding: 20px;
-}
-
-.topContainer {
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
+    text-align: center;
     margin-bottom: 20px;
-    padding: 20px;
 }
 
-.top {
-    display: flex;
-    align-items: center;
-}
-
-.dateX {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-}
-
-.dateX div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.weatherBox {
-    display: flex;
-    align-items: center;
-}
-/* ################## Form ############################ */
 form {
-    max-width: 300px;
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 form input {
-    width: 200px;
-    all: unset;
+    padding: 10px;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.2);
-    font-size: 2rem;
-    padding: 8px 15px;
-    color: rgba(255, 255, 255, 0.75);
-    font-weight: 700;
+    color: white;
+    flex-grow: 1;
+    max-width: 100%;
+    outline: none;
+    transition: box-shadow 0.3s ease;
 }
 
-::placeholder {
-    color: rgba(255, 255, 255, 0.75);
+form input:focus {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    outline: none;
 }
 
-/* ################# Box Shadow ################### */
+.search {
+    display: none;
+}
 
-form input,
+.submitBtn {
+    all: unset;
+    cursor: pointer;
+    color: white;
+}
+
 .topContainer,
 .dateX,
-.details div,
-.dateX div {
-    border-radius: 5px;
-    border: rgba(255, 255, 255, 0.75) solid 1px;
-    background-color: rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
-    box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
-}
-
-form input,
-.topContainer,
-.dateX {
-    margin-bottom: 20px;
-}
-
-/*  ############## Details #######################*/
-
-.sunriseContainer {
-    display: flex;
-    gap: 10px;
-    color: whitesmoke;
-}
-
-.minTemp-sunRise * {
-    display: flex;
-}
-
-.minMax div,
-.minTemp-sunRise div {
-    display: flex;
-    margin-bottom: 8px;
-    align-items: center;
-    justify-content: center;
-}
-
-.sunrise {
-    margin-bottom: 5px;
-}
-
 .details,
 .sunTemp {
-    border-radius: 5px;
-    border: rgba(255, 255, 255, 0.75) solid 1px;
-    background-color: rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
-    box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
-    padding: 20px;
     margin-bottom: 20px;
-}
-
-.details div {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.temp {
-    font-size: 8rem;
-    color: rgb(255, 123, 0);
-    margin-bottom: 8px;
-}
-
-.feel {
-    color: whitesmoke;
-    margin-bottom: 16px;
-    margin-top: 16px;
-}
-
-.feelsLike {
-    color: rgb(255, 123, 0);
-}
-.weather {
-    font-size: 3rem;
-    color: whitesmoke;
-}
-
-.date,
-.city {
-    font-size: clamp(1.5rem, 1.7316rem + -0.9882vw, 0.1875rem);
-    color: rgba(255, 255, 255, 0.87);
-}
-
-.city {
-    font-size: clamp(1rem, 0.4706rem + 2.2588vw, 4rem);
-    margin-bottom: 15px;
-}
-
-.country {
-    color: whitesmoke;
-    margin-bottom: 15px;
+    width: 100%;
 }
 
 .details {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr;
     gap: 20px;
+    width: 100%;
 }
 
-.details div,
-.sunTemp div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 30px;
-    background-color: rgba(0, 0, 0, 0.2);
+.details div {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    max-width: 100%;
+}
+
+.temp {
+    font-size: 6rem;
+    color: rgb(255, 123, 0);
+}
+
+.weather {
+    font-size: 2.5rem;
     color: whitesmoke;
+}
+
+.city,
+.country,
+.date {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.87);
 }
 
 .sunTemp {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 1fr;
     gap: 20px;
+    max-width: 100%;
 }
 
 .sunTemp div {
-    color: white;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    text-align: center;
     border-radius: 5px;
-    border: rgba(255, 255, 255, 0.75) solid 1px;
-    background-color: rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
-    box-shadow: 0px 0px 24px 7px rgba(255, 255, 255, 0.3);
+    color: white;
 }
 
 .sunTemp img {
@@ -311,78 +152,123 @@ form input,
     height: 50px;
 }
 
-.sunTemp h3 {
-    font-size: clamp(1rem, 0.7794rem + 0.9412vw, 2.25rem);
-}
-
-/* ####################### More/5 Days #########################*/
-
-.more {
-    display: none;
-
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.329);
-    /* align-items: center; */
-    /* justify-content: center; */
-    color: white;
-    display: none;
-    all: unset;
-}
-
-.fiveDays {
-    display: none;
-}
-
-/* ####################### fontawesome icons ################## */
-
-.fa-sun,
-.fa-arrow-down,
-.fa-arrow-up {
-    color: rgb(255, 238, 0);
-    margin-bottom: 8px;
-}
-
-.fa-temperature-arrow-up,
-.fa-temperature-arrow-down {
-    margin-bottom: 8px;
-}
-
-.fa-magnifying-glass {
-    font-size: large;
-    cursor: pointer;
-    color: whitesmoke;
-}
-
-.fa-magnifying-glass:hover {
-    transition: 300ms ease-in-out;
-    transform: scale(1.2);
-}
-
-.fa-wind {
-    color: rgb(5, 5, 253);
-}
-
-.fa-droplet {
-    color: blue;
-}
-
-.fa-gauge-high {
-    color: darkorange;
-}
-
-.fa-cloud {
-    color: rgb(204, 197, 197);
-}
-
-/* ##################### footer ######################## */
-
 .moreDiv p {
-    color: whitesmoke;
-    font-size: 1.25rem;
     text-align: center;
+    font-size: 1.25rem;
+    color: whitesmoke;
+}
+
+* {
+    overflow-x: hidden !important;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        background-image: none;
+        background-color: black;
+        overflow-x: hidden;
+    }
+
+    .innerContainer {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .details {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .sunTemp {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .temp {
+        font-size: 5rem;
+    }
+
+    .weather {
+        font-size: 2rem;
+    }
+
+    .city,
+    .country,
+    .date {
+        font-size: 1.4rem;
+    }
+
+    form input {
+        width: 100%;
+    }
+
+    body,
+    h1,
+    h2,
+    h3,
+    p,
+    a,
+    input {
+        color: white !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .innerContainer {
+        max-width: 90%;
+    }
+
+    .details {
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+    }
+
+    .sunTemp {
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+    }
+
+    .temp {
+        font-size: 7rem;
+    }
+
+    .weather {
+        font-size: 2.5rem;
+    }
+
+    .city,
+    .country,
+    .date {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .innerContainer {
+        max-width: 600px;
+    }
+
+    .details {
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+    }
+
+    .sunTemp {
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+    }
+
+    .temp {
+        font-size: 8rem;
+    }
+
+    .weather {
+        font-size: 3rem;
+    }
+
+    .city,
+    .country,
+    .date {
+        font-size: 2rem;
+    }
 }

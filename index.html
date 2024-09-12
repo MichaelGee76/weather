@@ -5,8 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="MichaelGee" content="Template" />
         <link rel="stylesheet" href="assets/css/style.css" />
-
-        <title>Document</title>
+        <title>Weather App</title>
     </head>
     <body>
         <div class="wrapper">
@@ -16,8 +15,16 @@
                         <h1></h1>
 
                         <form>
-                            <input type="text" class="input" placeholder="Check weather in ..." spellcheck="false" onfocus="this.value=''" />
-                            <button type="submit" class="submitBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input
+                                type="text"
+                                class="input"
+                                placeholder="Check weather in ..."
+                                spellcheck="false"
+                                onfocus="this.value=''"
+                            />
+                            <button type="submit" class="submitBtn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
 
                             <button class="search">Weather</button>
                         </form>
@@ -26,7 +33,9 @@
                     <div class="detailContainer">
                         <div class="topContainer">
                             <div class="top"></div>
-                            <div class="weatherBox"><h3 class="weather"></h3></div>
+                            <div class="weatherBox">
+                                <h3 class="weather"></h3>
+                            </div>
                             <div class="topDetails">
                                 <h3 class="temp"></h3>
                                 <h3 class="feel"></h3>
@@ -85,8 +94,11 @@
                             <div class="day5"></div>
                         </div>
                         <div class="moreDiv">
-                            <button class="more"></button>
-                            <p>&copy by Michael Gee - not a designer, but a programmer</p>
+                            <button class="more" style="all: unset"></button>
+                            <p>
+                                &copy Michael Gee | Not a designer, but a
+                                programmer.
+                            </p>
                         </div>
                         <div class="fiveDays"></div>
                     </div>
@@ -94,7 +106,10 @@
             </section>
         </div>
 
-        <script src="https://kit.fontawesome.com/290ffec511.js" crossorigin="anonymous"></script>
+        <script
+            src="https://kit.fontawesome.com/290ffec511.js"
+            crossorigin="anonymous"
+        ></script>
         <script src="assets/js/main.js"></script>
     </body>
 </html>
